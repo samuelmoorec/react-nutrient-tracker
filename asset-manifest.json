@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/react-nutrient-tracker/static/css/main.5f361e03.chunk.css",
+    "main.js": "/react-nutrient-tracker/static/js/main.e54183d3.chunk.js",
+    "main.js.map": "/react-nutrient-tracker/static/js/main.e54183d3.chunk.js.map",
+    "runtime-main.js": "/react-nutrient-tracker/static/js/runtime-main.5bed4392.js",
+    "runtime-main.js.map": "/react-nutrient-tracker/static/js/runtime-main.5bed4392.js.map",
+    "static/js/2.3791a31a.chunk.js": "/react-nutrient-tracker/static/js/2.3791a31a.chunk.js",
+    "static/js/2.3791a31a.chunk.js.map": "/react-nutrient-tracker/static/js/2.3791a31a.chunk.js.map",
+    "index.html": "/react-nutrient-tracker/index.html",
+    "precache-manifest.db8a659c5dd17220620687a6066ea976.js": "/react-nutrient-tracker/precache-manifest.db8a659c5dd17220620687a6066ea976.js",
+    "service-worker.js": "/react-nutrient-tracker/service-worker.js",
+    "static/css/main.5f361e03.chunk.css.map": "/react-nutrient-tracker/static/css/main.5f361e03.chunk.css.map",
+    "static/js/2.3791a31a.chunk.js.LICENSE.txt": "/react-nutrient-tracker/static/js/2.3791a31a.chunk.js.LICENSE.txt",
+    "static/media/logo.svg": "/react-nutrient-tracker/static/media/logo.5d5d9eef.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.5bed4392.js",
+    "static/js/2.3791a31a.chunk.js",
+    "static/css/main.5f361e03.chunk.css",
+    "static/js/main.e54183d3.chunk.js"
+  ]
+}

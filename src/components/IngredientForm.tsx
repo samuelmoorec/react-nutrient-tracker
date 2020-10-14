@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import NutritionalStatsForm from './NutritionalStatsForm'
 
 interface iProps {
   nutritionTypes: Array<string>;
@@ -25,7 +26,7 @@ export interface ingredient {
 function IndgredientForm({nutritionTypes,ingredients,SetIngredients} : iProps) {
   
   const [ingredientToAdd, setIngredientToAdd] = useState<string>();
-  const [ingredientData, setIngredientData] = useState<ingredient>({title: "", servingSize: 0, servingUnit: "Milliliter", nutritionalStats: [{type: ""}]});
+  const [ingredientData, setIngredientData] = useState<ingredient>({title: "", servingSize: 0, servingUnit: "Milliliter", nutritionalStats: [{type: "",amount: 0,unit: "Gram"}]});
   const [nutriType, setNutriType] = useState<string>("");
 
 
@@ -69,20 +70,7 @@ function IndgredientForm({nutritionTypes,ingredients,SetIngredients} : iProps) {
 
           <br/>
 
-          <select name="nutritionTypeSelections" value={nutriType} id="nutritionTypeSelections" onChange={(e) => NutritionTypeSelectionHandler(e)}>
-                {nutritionTypes.map(nutrType => <option value={nutrType}>{nutrType}</option> )}
-          </select>
-
-          <input name="IngredientForm" value={ingredientToAdd} onChange={event => setIngredientToAdd(event.target.value)} type="number"/>
-
-          <select name="unitMeasurment" onChange={() =>console.log("hello")} id="">
-              <option value="Gram">g</option>
-              <option value="MilliGram">mg</option>
-          </select>
-
-          <br/>
-
-          <button>ADD</button>
+            <NutritionalStatsForm ingredientData={ingredientData} SetIngredientData={setIngredientData} nutritionTypes={nutritionTypes} />
       </form>
     </div>
   );

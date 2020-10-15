@@ -9,7 +9,7 @@ function App() {
 
   const [ingredients, setIngredients ] = useState<Array<object>>([]);
   const [nutritionalStats, setNutritionalStats] = useState<object>();
-  const [nutritionTypes, setNutritionTypes] = useState([]);
+  const [nutritionTypes, setNutritionTypes] = useState(["Sodium"]);
 
   
   return (

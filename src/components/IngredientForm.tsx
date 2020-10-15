@@ -7,7 +7,7 @@ interface IIngredientFormProps {
   SetIngredients: Function;
 }
 
-export interface nutritionalStat {
+export interface nutritionalFact {
     type?: string;
     amount?: number;
     unit?: string;
@@ -17,7 +17,7 @@ export interface ingredient {
     title?: string;
     servingSize?: number;
     servingUnit?: string;
-    nutritionalStats?: Array<nutritionalStat>
+    nutritionalStats?: Array<nutritionalFact>
 }
 
 const servingUnits = [ 'tbsp', 'milliliters'];
@@ -41,7 +41,7 @@ const IndgredientForm = ({ nutritionTypes } : IIngredientFormProps) => {
 
           <select name="ServingUnit" id="" defaultValue={servingUnit} onChange={ e => setServingUnit(e.target.value) }>
               {
-                servingUnits.map(unit => <option value={unit}>{unit}</option>)
+                servingUnits.map((unit,index) => <option key={index} value={unit}>{unit}</option>)
               }
           </select>
 

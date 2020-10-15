@@ -8,13 +8,13 @@ import './App.css';
 function App() {
 
   const [ingredients, setIngredients ] = useState<Array<object>>([]);
-  const [nutritionalStats, SetNutritionalStats] = useState<object>();
-  const [nutritionTypes, SetNutritionTypes] = useState<Array<string>>([]);
+  const [nutritionalStats, setNutritionalStats] = useState<object>();
+  const [nutritionTypes, setNutritionTypes] = useState([]);
 
   
   return (
     <div className="App">
-    <NutritionTypeForm nutritionTypes={nutritionTypes} SetNutritionTypes={SetNutritionTypes}/>
+    <NutritionTypeForm nutritionTypes={nutritionTypes} setNutritionTypes={setNutritionTypes}/>
     <br/>
     <IngredientForm nutritionTypes={nutritionTypes} ingredients={ingredients} SetIngredients={setIngredients} /> 
     </div>

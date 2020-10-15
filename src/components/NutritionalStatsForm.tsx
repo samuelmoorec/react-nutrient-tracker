@@ -1,107 +1,74 @@
-import React, { useEffect, useState } from 'react';
-import {nutritionalStat, ingredient} from './IngredientForm'
+import React, { useState } from 'react';
+import { ingredient } from './IngredientForm'
 
 interface iProps {
-    ingredientData: ingredient;
-    SetIngredientData: Function;
-    nutritionTypes: Array<string>;
-
+  ingredientData: ingredient;
+  setIngredientData: Function;
+  nutritionTypes: Array<string>;
 }
 
+const unitMeasurements = ['g', 'mg'];
+
+const NutritionalStatsForm = ({ ingredientData, setIngredientData, nutritionTypes } : iProps) => {
+    const [selectedNutrientType, setNutrientType] = useState(nutritionTypes[0] || '');
+    const [nutrientAmount, setNutrientAmount] = useState(0);
+    const [unitMeasurment, setUnitMeasurment] = useState(unitMeasurements[0]);
+    const [nutritionalFacts, setNutritionalFacts] = useState();
+    console.log(selectedNutrientType);
+    const handleAddNutrient = () => {
+        console.log(selectedNutrientType);
+        const NewNutrient = {
+            type: selectedNutrientType,
+            amount: nutrientAmount,
+            unit: unitMeasurment,
+        }
+        nutritionalFacts && nutritionalFacts.length ? setNutritionalFacts([NewNutrient, ...nutritionalFacts]) : setNutritionalFacts([NewNutrient]);
+    }
 
 
+    const NutrientForm = (
+        <div>
+            <select name="nutritionTypeSelections" defaultValue={selectedNutrientType} id="nutritionTypeSelections" onChange={ e => setNutrientType(e.target.value)}>
+            {
+                nutritionTypes.map(nutrType => <option value={nutrType}>{nutrType}</option> )
+            }
+            </select>
 
-function NutritionalStatsForm({ingredientData,SetIngredientData,nutritionTypes} : iProps) {
-  
-  const [ingredientToAdd, setIngredientToAdd] = useState<string>();
+            <input name="IngredientForm" type="number" defaultValue={nutrientAmount} onChange={ e => setNutrientAmount(+e.target.value) }/>
+            <select name="unitMeasurment" value={unitMeasurment} onChange={ e => setUnitMeasurment(e.target.value) }>
+            {
+                unitMeasurements.map(unit => <option value={unit}>{unit}</option>)
+            }
+            </select>
+            <button onClick={() => handleAddNutrient()}>ADD</button>
+        </div>
+    );
 
+    const NutrientTable = (
+        <table>
+            <tr>
+                <th>Type</th>
+                <th>Amount</th>
+                <th>Measurement</th>
+            </tr>
+            { nutritionalFacts &&
+                nutritionalFacts.map((fact: { type: React.ReactNode; amount: React.ReactNode; unit: React.ReactNode; }) => {
+                    return (
+                        <tr>
+                            <td>{fact.type}</td>
+                            <td>{fact.amount}</td>
+                            <td>{fact.unit}</td>
+                        </tr>
+                    )
+                })
+            }
+        </table>
+    );
 
-
-
-    const NutritionTypeSelectionHandler = (e: React.ChangeEvent<HTMLSelectElement>,key: number) => {
-        let temp = ingredientData;
-
-        if(temp.nutritionalStats){
-
-        temp.nutritionalStats[key] = {...temp.nutritionalStats[key], type: e.target.value}
-
-        console.log(temp)
-
-        SetIngredientData(temp);
-    }}
-
-    const NutritionAmountHandler = (e: React.ChangeEvent<HTMLInputElement>,key: number) => {
-        
-
-        let temp = ingredientData;
-
-        if(temp.nutritionalStats){
-
-        temp.nutritionalStats[key] = {...temp.nutritionalStats[key], amount: Number(e.target.value)}
-
-        console.log(temp)
-
-        SetIngredientData(temp);
-
-    }}
-
-    const NutritionUnitSelectionHandler = (e: React.ChangeEvent<HTMLSelectElement>,key: number) => {
-        let temp = ingredientData;
-
-        if(temp.nutritionalStats){
-
-        temp.nutritionalStats[key] = {...temp.nutritionalStats[key], unit: e.target.value}
-
-        console.log(temp)
-
-        SetIngredientData(temp);
-    }}
-
-    const addNutritionItem = () => {
-        let temp = ingredientData;
-
-        if(temp.nutritionalStats){
-
-        temp.nutritionalStats = [...temp.nutritionalStats, {type: "",amount: 0,unit: "Gram"}]
-
-        SetIngredientData(temp);
-    }}
-
-    useEffect(() => {
-        
-    })
-
-    const NutritionItem = ingredientData.nutritionalStats?.map((item, index) => <>
-    
-    <div key={index}>
-
-        <select name="nutritionTypeSelections" value={item.type} id="nutritionTypeSelections" onChange={event => NutritionTypeSelectionHandler(event,index)}>
-
-            {nutritionTypes.map(nutrType => <option value={nutrType}>{nutrType}</option> )}
-
-        </select>
-
-        <input name="IngredientForm"  type="number" value={item.amount} onChange={event => NutritionAmountHandler(event,index)}/>
-
-        <select name="unitMeasurment" value={item.unit} onChange={event => NutritionUnitSelectionHandler(event,index)} id="">
-
-            <option value="Gram">g</option>
-            <option value="MilliGram">mg</option>
-
-        </select>
-
-        <br/>
-    </div>
-
-    </>)
-
-    
-  
   return (
     <>
-          {NutritionItem}
-
-          <button onClick={addNutritionItem}>ADD</button>
+     {NutrientForm}
+     {ingredientData && NutrientTable}
     </>
   );
 }

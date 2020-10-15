@@ -1,29 +1,26 @@
 import React, { useState } from 'react';
 
 interface iProps {
-  nutritionTypes: Array<string>,
-  SetNutritionTypes: Function
+  nutritionTypes: string[],
+  setNutritionTypes: Function
 }
 
-function NutritionalTypeForm({nutritionTypes,SetNutritionTypes} : iProps) {
-  
-  const [nutritionTypeToAdd, SetnutritionTypeToAdd] = useState<string>();
+function NutritionalTypeForm({ nutritionTypes, setNutritionTypes} : iProps) {
+  const [nutrient, setNutrient] = useState('');
 
-  const addNutrition = () => {
-    SetNutritionTypes([nutritionTypeToAdd, ...nutritionTypes]);
-    SetnutritionTypeToAdd("");
+  const handleNutrientSubmission = () => {
+    if (nutritionTypes.includes(nutrient)) {
+      console.log('duplicate check') // You can add some kind of validation here
+    } else {
+      setNutritionTypes([nutrient, ...nutritionTypes]);
+    }
   }
-  
+
   return (
     <div>
-      <form onSubmit={e => {
-        e.preventDefault() 
-        addNutrition() 
-        }} action="">
-          <label htmlFor="nutriTypeForm">ADD Nutrition Type</label>
-          <input name="nutriTypeForm" value={nutritionTypeToAdd} onChange={event => SetnutritionTypeToAdd(event.target.value)} type="text"/>
-          <input type="submit" value="ADD"/>
-      </form>
+      <label htmlFor="nutriTypeForm">ADD Nutrition Type</label>
+      <input name="nutriTypeForm" defaultValue={nutrient} onChange={e => setNutrient(e.target.value)} type="text"/>
+      <button onClick={() => handleNutrientSubmission()}>Add New Nutrient</button>
     </div>
   );
 }
